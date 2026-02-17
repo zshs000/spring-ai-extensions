@@ -17,6 +17,9 @@ package com.alibaba.cloud.ai.reader.bilibili;
 
 import org.springframework.util.Assert;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Represents a Bilibili video resource with authentication credentials.
  *
@@ -45,9 +48,15 @@ public class BilibiliResource {
 
 	/**
 	 * Extract BV ID from URL or raw BV ID
+	 * @throws IllegalArgumentException if input doesn't contain a valid BV ID
 	 */
 	private String extractBvid(String input) {
-		return input.replaceAll(".*(BV\\w+).*", "$1");
+		Pattern pattern = Pattern.compile("(BV\\w+)");
+		Matcher matcher = pattern.matcher(input);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		throw new IllegalArgumentException("Invalid Bilibili video identifier: " + input);
 	}
 
 }

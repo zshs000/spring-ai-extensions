@@ -62,6 +62,32 @@ public class BilibiliDocumentReaderTest {
 	}
 
 	/**
+	 * Test invalid BV ID should throw exception.
+	 */
+	@Test
+	void testInvalidBvidThrowsException() {
+		BilibiliCredentials testCredentials = BilibiliCredentials.builder()
+			.sessdata("test_sessdata")
+			.biliJct("test_bili_jct")
+			.build();
+
+		// Test with invalid input (no BV ID)
+		assertThrows(IllegalArgumentException.class, () -> {
+			new BilibiliResource("https://www.youtube.com/watch?v=123", testCredentials);
+		});
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new BilibiliResource("hello world", testCredentials);
+		});
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new BilibiliResource("invalid_video_id", testCredentials);
+		});
+
+		logger.info("Invalid BV ID validation test passed");
+	}
+
+	/**
 	 * Test credentials builder validation.
 	 * This test does not require credentials.
 	 */
