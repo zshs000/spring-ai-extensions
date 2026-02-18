@@ -94,7 +94,7 @@ public class BilibiliDocumentReader implements DocumentReader {
 		return WebClient.builder()
 			.defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
 			.defaultHeader(HttpHeaders.USER_AGENT,
-					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+					"Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36")
 			.defaultHeader(HttpHeaders.COOKIE, buildCookieHeader(credentials))
 			.codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(MAX_MEMORY_SIZE))
 			.build();

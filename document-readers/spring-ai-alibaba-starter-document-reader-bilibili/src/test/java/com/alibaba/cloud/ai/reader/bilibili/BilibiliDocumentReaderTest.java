@@ -19,14 +19,15 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for Bilibili document reader.
  * These tests do not require credentials and can run in CI environments.
  *
  * @author zshs000
- * @since 2026/2/16
  */
 public class BilibiliDocumentReaderTest {
 

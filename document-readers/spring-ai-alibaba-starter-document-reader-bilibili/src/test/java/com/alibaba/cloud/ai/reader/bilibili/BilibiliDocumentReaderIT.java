@@ -25,7 +25,8 @@ import org.springframework.ai.document.Document;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Integration tests for Bilibili document reader.
@@ -38,7 +39,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * mvn verify
  *
  * @author zshs000
- * @since 2026/2/16
  */
 @EnabledIfEnvironmentVariable(named = "BILIBILI_SESSDATA", matches = ".+")
 public class BilibiliDocumentReaderIT {
