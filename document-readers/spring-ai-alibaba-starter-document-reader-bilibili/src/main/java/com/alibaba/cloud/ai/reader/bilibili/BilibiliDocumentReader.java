@@ -48,6 +48,8 @@ public class BilibiliDocumentReader implements DocumentReader {
 
 	private static final Logger logger = LoggerFactory.getLogger(BilibiliDocumentReader.class);
 
+	public static final String SDK_FLAG = "SpringAIAlibaba";
+
 	private static final String API_VIDEO_INFO = "https://api.bilibili.com/x/web-interface/view";
 
 	private static final String API_PAGE_LIST = "https://api.bilibili.com/x/player/pagelist";
@@ -93,11 +95,15 @@ public class BilibiliDocumentReader implements DocumentReader {
 	private WebClient createWebClient(BilibiliCredentials credentials) {
 		return WebClient.builder()
 			.defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-			.defaultHeader(HttpHeaders.USER_AGENT,
-					"Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36")
+			.defaultHeader(HttpHeaders.USER_AGENT, userAgent())
 			.defaultHeader(HttpHeaders.COOKIE, buildCookieHeader(credentials))
 			.codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(MAX_MEMORY_SIZE))
 			.build();
+	}
+
+	private static String userAgent() {
+		return String.format("%s/%s; java/%s; platform/%s; processor/%s", SDK_FLAG, "1.0.0",
+				System.getProperty("java.version"), System.getProperty("os.name"), System.getProperty("os.arch"));
 	}
 
 	private String buildCookieHeader(BilibiliCredentials credentials) {
